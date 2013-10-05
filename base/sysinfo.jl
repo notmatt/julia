@@ -180,7 +180,9 @@ function shlib_list()
 
     @osx_only begin
         numImages = ccall( cglobal("_dyld_image_count"), Cint, (), )
-        for i in 1:numImages
+
+        # start at 1 instead of 0 to skip self
+        for i in 1:numImages-1
             name = bytestring(ccall( cglobal("_dyld_get_image_name"), Ptr{Uint8}, (Uint32,), uint32(i)))
             push!(dynamic_libraries, name)
         end
