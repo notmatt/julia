@@ -239,6 +239,8 @@ end
 to_index(i)       = i
 to_index(i::Real) = convert(Int, i)
 to_index(i::Int)  = i
+to_index(I::AbstractArray{Bool,1}) = find(I)
+to_index(I::Tuple) = map(to_index, I)
 
 # vectorization
 
